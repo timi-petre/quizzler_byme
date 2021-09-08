@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quizzler_byme/question.dart';
+import 'package:quizzler_byme/quizbrain.dart';
+
+QuizBrain quizBrain = QuizBrain();
 
 void main() => runApp(Quizzler());
 
@@ -28,17 +30,6 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Widget> scoreKeeper = [];
 
-  List<Question> listQuestion = [
-    Question(
-        questionText: 'You can lead a cow down stairs but not up stairs.',
-        isQuestionAnswer: false),
-    Question(
-        questionText:
-            'Approximately one quarter of human bones are in the feet.',
-        isQuestionAnswer: true),
-    Question(questionText: 'A slug\'s blood is green.', isQuestionAnswer: true),
-  ];
-
   int _currentQuestion = 0; //keep track of current question
   @override
   Widget build(BuildContext context) {
@@ -52,7 +43,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                listQuestion[_currentQuestion].questionText!,
+                quizBrain.listQuestion[_currentQuestion].questionText!,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -81,7 +72,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 bool correctAnswer =
-                    listQuestion[_currentQuestion].isQuestionAnswer!;
+                    quizBrain.listQuestion[_currentQuestion].isQuestionAnswer!;
                 correctAnswer == true
                     ? print('User got it right')
                     : print('User got it wrong');
@@ -110,7 +101,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 bool correctAnswer =
-                    listQuestion[_currentQuestion].isQuestionAnswer!;
+                    quizBrain.listQuestion[_currentQuestion].isQuestionAnswer!;
                 correctAnswer == true
                     ? print('User got it right')
                     : print('User got it wrong');
