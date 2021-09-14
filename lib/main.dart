@@ -29,8 +29,9 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Widget> scoreKeeper = [];
+  // ignore: unused_field
+  int _currentQuestion = 0;
 
-  int _currentQuestion = 0; //keep track of current question
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,7 +44,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.listQuestion[_currentQuestion].questionText!,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -61,8 +62,6 @@ class _QuizPageState extends State<QuizPage> {
                 backgroundColor: Colors.green,
                 primary: Colors.white,
               ),
-              // textColor: Colors.white,
-              // color: Colors.green,
               child: Text(
                 'True',
                 style: TextStyle(
@@ -72,7 +71,8 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 bool correctAnswer =
-                    quizBrain.listQuestion[_currentQuestion].isQuestionAnswer!;
+                    //quizBrain.listQuestion[_currentQuestion].isQuestionAnswer!;
+                    quizBrain.getQuestionAnswer();
                 correctAnswer == true
                     ? print('User got it right')
                     : print('User got it wrong');
@@ -81,7 +81,7 @@ class _QuizPageState extends State<QuizPage> {
                   scoreKeeper.add(correctAnswer == true
                       ? Icon(Icons.check, color: Colors.green)
                       : Icon(Icons.close, color: Colors.red));
-                  _currentQuestion++;
+                  quizBrain.nextQuestion();
                 });
               },
             ),
@@ -100,8 +100,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                bool correctAnswer =
-                    quizBrain.listQuestion[_currentQuestion].isQuestionAnswer!;
+                bool correctAnswer = quizBrain.getQuestionAnswer();
                 correctAnswer == true
                     ? print('User got it right')
                     : print('User got it wrong');
@@ -111,7 +110,7 @@ class _QuizPageState extends State<QuizPage> {
                   scoreKeeper.add(correctAnswer == false
                       ? Icon(Icons.check, color: Colors.green)
                       : Icon(Icons.close, color: Colors.red));
-                  _currentQuestion++;
+                  quizBrain.nextQuestion();
                 });
               },
             ),
