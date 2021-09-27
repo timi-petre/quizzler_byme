@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:quizzler_byme/question.dart';
 
 class QuizBrain {
@@ -44,5 +42,19 @@ class QuizBrain {
 
   bool getQuestionAnswer() {
     return _listQuestion[_questionNumber].isQuestionAnswer;
+  }
+
+  bool isFinished() {
+    if (_questionNumber >= _listQuestion.length - 1) {
+      print('true');
+      return true;
+    } else {
+      print('false');
+      return false;
+    }
+  }
+
+  void reset() {
+    _questionNumber = 0;
   }
 }
